@@ -2,7 +2,6 @@ package bundle
 
 import (
 	"fmt"
-	"spa/assets"
 	"spa/assets/html"
 )
 
@@ -15,9 +14,4 @@ func CreateBundle(HTML *html.HTML) string {
 	jsContent := fmt.Sprintf("var file = `%s`; \n %s \n", bundleHTML, HTML.GetJsScript())
 
 	return jsContent
-}
-
-// GenerateBundleName ...
-func GenerateBundleName(length int) string {
-	return fmt.Sprintf("%s.bundle.js", assets.CreateRandomStr(length))
 }

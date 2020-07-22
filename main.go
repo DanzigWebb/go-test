@@ -7,21 +7,25 @@ import (
 	"spa/assets/html"
 
 	"spa/assets/scripts"
-	"spa/assets/vars"
 )
 
 func main() {
 
-	vars.BundleName = bundle.GenerateBundleName(12)
+	var (
+		bundleName = assets.GenerateBundleName(12)
+		selector   = assets.GenerateSelectorName(10)
+	)
+
 	query := assets.GetQueryDoc("ru/index.html")
+	HTML := html.New(query, bundleName, selector)
 
-	HTML := html.New(query, vars.BundleName, vars.Selector)
-
-	bodyScripts := scripts.Cut(HTML)
-	bundle := bundle.CreateBundle(HTML)
-	outputHTML := HTML.GetOutputHTML(bodyScripts)
-
-	newHTML, newBundle := "ru/copy.html", "ru/"+vars.BundleName
+	var (
+		bodyScripts = scripts.Cut(HTML)
+		bundle      = bundle.CreateBundle(HTML)
+		outputHTML  = HTML.GetOutputHTML(bodyScripts)
+		newHTML     = "ru/copy.html"
+		newBundle   = "ru/" + bundleName
+	)
 
 	ioutil.WriteFile(newHTML, []byte(outputHTML), 0600)
 	ioutil.WriteFile(newBundle, []byte(bundle), 0600)
