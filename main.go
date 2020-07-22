@@ -23,8 +23,9 @@ func main() {
 		bodyScripts = scripts.Cut(HTML)
 		bundle      = bundle.CreateBundle(HTML)
 		outputHTML  = HTML.GetOutputHTML(bodyScripts)
-		newHTML     = "ru/copy.html"
-		newBundle   = "ru/" + bundleName
+
+		newHTML   = "ru/copy.html"
+		newBundle = "ru/" + bundleName
 	)
 
 	ioutil.WriteFile(newHTML, []byte(outputHTML), 0600)
