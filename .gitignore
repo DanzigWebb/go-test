@@ -1,7 +1,9 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/go,webstorm,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=go,webstorm,intellij
-
+mock
+mock/**
+mock/index.html
 ### Go ###
 # Binaries for programs and plugins
 *.exe
@@ -10,7 +12,7 @@
 *.so
 *.dylib
 spa
-
+mock/**
 # Test binary, built with `go test -c`
 *.test
 
@@ -185,3 +187,4 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/go,webstorm,intellij
 .DS_Store
+
