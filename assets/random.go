@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// CreateRandomStr return random str with current lenght of symbols
 func CreateRandomStr(length int) string {
 	rand.Seed(time.Now().UnixNano())
 	chars := []rune("ABCDEFGHIJKLMNOPQRSTUVWXYabcdefghijklmnopqrstuvwxyz0123456789")

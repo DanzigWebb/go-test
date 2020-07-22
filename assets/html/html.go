@@ -9,23 +9,30 @@ import (
 
 // HTML ...
 type HTML struct {
+	query      *goquery.Document
 	bundleName string
 	selector   string
 }
 
 // New HTML config
-func New(bundleName, Selector string) *HTML {
+func New(query *goquery.Document, bundleName, Selector string) *HTML {
 	return &HTML{
+		query:      query,
 		bundleName: bundleName,
 		selector:   Selector,
 	}
 }
 
+// Query return goQuery html
+func (s *HTML) Query() *goquery.Document {
+	return s.query
+}
+
 // GetOutputHTML return html file afte modify
-func (s *HTML) GetOutputHTML(query *goquery.Document, cutScripts string) string {
-	body := query.Find("body")
+func (s *HTML) GetOutputHTML(cutScripts string) string {
+	body := s.query.Find("body")
 	body.SetHtml(s.getBodyAndScripts(cutScripts) + "\n")
-	outputHTML, err := query.Html()
+	outputHTML, err := s.query.Html()
 
 	if err != nil {
 		log.Fatal(err)

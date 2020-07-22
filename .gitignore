@@ -1,9 +1,7 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/go,webstorm,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=go,webstorm,intellij
-mock
-mock/**
-mock/index.html
+ru**
 ### Go ###
 # Binaries for programs and plugins
 *.exe

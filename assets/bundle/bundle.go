@@ -4,14 +4,12 @@ import (
 	"fmt"
 	"spa/assets"
 	"spa/assets/html"
-
-	"github.com/PuerkitoBio/goquery"
 )
 
-// CreateBundle ...
-func CreateBundle(doc *goquery.Document, HTML *html.HTML) string {
+// CreateBundle and return it as string
+func CreateBundle(HTML *html.HTML) string {
 
-	body := doc.Find("body")
+	body := HTML.Query().Find("body")
 	bundleHTML, _ := body.Html()
 
 	jsContent := fmt.Sprintf("var file = `%s`; \n %s \n", bundleHTML, HTML.GetJsScript())

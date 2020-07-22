@@ -1,23 +1,15 @@
 package assets
 
 import (
-	"github.com/PuerkitoBio/goquery"
 	"log"
 	"os"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
-func GetHtml(src string) *os.File {
-	file, err := os.Open(src)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return file
-}
-
+// GetQueryDoc return queryHTML
 func GetQueryDoc(src string) *goquery.Document {
-	file := GetHtml(src)
+	file := getHTML(src)
 	doc, err := goquery.NewDocumentFromReader(file)
 
 	if err != nil {
@@ -25,4 +17,14 @@ func GetQueryDoc(src string) *goquery.Document {
 	}
 
 	return doc
+}
+
+func getHTML(src string) *os.File {
+	file, err := os.Open(src)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return file
 }
