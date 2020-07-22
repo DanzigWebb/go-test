@@ -7,10 +7,12 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
+// Cut scripts from body and return them
 func Cut(query *goquery.Document) string {
 	var scripts = make([]string, 0)
 
 	query.Find("body script").Each(func(index int, script *goquery.Selection) {
+		
 		src, hasSrc := script.Attr("src")
 		content := script.Text()
 

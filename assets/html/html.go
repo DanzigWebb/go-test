@@ -3,34 +3,47 @@ package html
 import (
 	"fmt"
 	"log"
-	"spa/assets/vars"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
-var bundleName, selector = vars.BundleName, vars.Selector
+// HTML ...
+type HTML struct {
+	bundleName string
+	selector   string
+}
 
-func GetOutputHtml(query *goquery.Document, bodyScripts string) string {
+// New HTML config
+func New(bundleName, Selector string) *HTML {
+	return &HTML{
+		bundleName: bundleName,
+		selector:   Selector,
+	}
+}
+
+// GetOutputHTML return html file afte modify
+func (s *HTML) GetOutputHTML(query *goquery.Document, cutScripts string) string {
 	body := query.Find("body")
-	body.SetHtml(GetBodyAndScripts(bundleName, bodyScripts))
-	outputHtml, err := query.Html()
+	body.SetHtml(s.getBodyAndScripts(cutScripts) + "\n")
+	outputHTML, err := query.Html()
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return outputHtml
+	return outputHTML
 }
 
-func GetJsScript() string {
-	return fmt.Sprintf("document.querySelector('#%s').innerHTML = file", selector)
+// GetJsScript return js script for render html
+func (s *HTML) GetJsScript() string {
+	return fmt.Sprintf("document.querySelector('#%s').innerHTML = file", s.selector)
 }
 
-func GetBodyAndScripts(bundleName, cutScripts string) string {
-	content := getBody(bundleName) + cutScripts
+func (s *HTML) getBodyAndScripts(cutScripts string) string {
+	content := s.getBody(s.bundleName) + cutScripts
 	return content
 }
 
-func getBody(bundleName string) string {
-	return fmt.Sprintf("<div id='%s'></div> \n <script src='%s'></script>", selector, bundleName)
+func (s *HTML) getBody(bundleName string) string {
+	return fmt.Sprintf("<div id='%s'></div>\n<script src='%s'></script>\n", s.selector, bundleName)
 }

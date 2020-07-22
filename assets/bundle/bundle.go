@@ -8,16 +8,18 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func CreateBundle(doc *goquery.Document) string {
+// CreateBundle ...
+func CreateBundle(doc *goquery.Document, HTML *html.HTML) string {
 
 	body := doc.Find("body")
-	bundleHtml, _ := body.Html()
+	bundleHTML, _ := body.Html()
 
-	jsContent := fmt.Sprintf("var file = `%s`; \n %s", bundleHtml, html.GetJsScript())
+	jsContent := fmt.Sprintf("var file = `%s`; \n %s \n", bundleHTML, HTML.GetJsScript())
 
 	return jsContent
 }
 
+// GenerateBundleName ...
 func GenerateBundleName(length int) string {
 	return fmt.Sprintf("%s.bundle.js", assets.CreateRandomStr(length))
 }
